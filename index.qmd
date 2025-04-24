@@ -1,0 +1,13 @@
+---
+title: "Eileen_Website"
+image: "IMG_9759.jpg"
+about:
+  template: jolla
+  links: 
+    - icon: envelope
+      href: mailto:e1ling@ucsd.edu
+    - icon: linkedin
+      href: www.linkedin.com/in/eileen-ling-ba80b9240/
+---
+
+This is Eileen Ling from MSBA!
