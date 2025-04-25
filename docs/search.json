@@ -1,19 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Eileen_Website",
-    "section": "",
-    "text": "This is Eileen Ling from MSBA!"
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Resume",
-    "section": "",
-    "text": "Download PDF file."
-  },
-  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "My Projects",
@@ -54,5 +40,19 @@
     "title": "A Replication of Karlan and List (2007)",
     "section": "Simulation Experiment",
     "text": "Simulation Experiment\nAs a reminder of how the t-statistic “works,” in this section I use simulation to demonstrate the Law of Large Numbers and the Central Limit Theorem.\nSuppose the true distribution of respondents who do not get a charitable donation match is Bernoulli with probability p=0.018 that a donation is made.\nFurther suppose that the true distribution of respondents who do get a charitable donation match of any size is Bernoulli with probability p=0.022 that a donation is made.\n\nLaw of Large Numbers\nI made a plot like those on slide 43 from our first class and explain the plot to the reader. To do this, I simulate 100,00 draws from the control distribution and 10,000 draws from the treatment distribution. I then calculate a vector of 10,000 differences, and then plot the cumulative average of that vector of differences.\nfrom scipy.stats import t\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define t-statistic and degrees of freedom\nt_stat = -2.6\ndf = 100  # degrees of freedom\n\n# Define x values for the t-distribution\nx = np.linspace(-4, 4, 1000)\n\n# Calculate the t-distribution pdf\npdf = t.pdf(x, df)\n\n# Calculate the p-value corresponding to the t-statistic (one-tailed)\np_value = t.cdf(t_stat, df)\n\n# Plot the t-distribution\nplt.plot(x, pdf, color='black', label='t-distribution')\n\n# Highlight the area in the left tail beyond the t-statistic\nx_fill = np.linspace(t_stat, -4, 1000)\ny_fill = t.pdf(x_fill, df)\nplt.fill_between(x_fill, y_fill, color='green', alpha=0.3, label=f'Area: p-value = {p_value:.4f}')\n\n# Mark the t-statistic on the plot\nplt.axvline(x=t_stat, color='red', linestyle='dashed', label=f't-stat = {t_stat}')\n\n# Add labels and title\nplt.title('t-Statistic and Corresponding p-value')\nplt.xlabel('t-value')\nplt.ylabel('Density')\nplt.legend()\n\nplt.grid(True)\nplt.show()\n\n\n\nt-Statistic and Corresponding p-value\n\n\nKey Elements: Black Curve: The t-distribution with the appropriate degrees of freedom.\nRed Dashed Line: The t-statistic of -2.6.\nGreen Shaded Area: The area in the tail of the distribution, corresponding to the p-value. In this case, the p-value is calculated as the area beyond the t-statistic in the left tail of the distribution, which is 0.0054.\nExplanation: The p-value represents the probability of obtaining a result at least as extreme as the observed result, assuming the null hypothesis is true. In this case, the p-value of 0.0054 indicates that we are in the tail of the distribution, which gives us some evidence against the null hypothesis (a result is statistically significant if the p-value is less than 0.05).\n\n\nCentral Limit Theorem\nI make 4 histograms like those on slide 44 from our first class at sample sizes 50, 200, 500, and 1000.\n# Reimporting the necessary libraries and re-running the simulation to generate the histograms\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Define the function to simulate the differences in means for given sample sizes\ndef simulate_diff_in_means(sample_size, control_prob=0.018, treatment_prob=0.022, n_iterations=1000):\n    diff_in_means = []  # List to store the differences in means\n    \n    for _ in range(n_iterations):\n        # Generate random samples from control and treatment distributions\n        control_sample = np.random.binomial(1, control_prob, sample_size)\n        treatment_sample = np.random.binomial(1, treatment_prob, sample_size)\n        \n        # Calculate the difference in means\n        control_mean = np.mean(control_sample)\n        treatment_mean = np.mean(treatment_sample)\n        diff_in_means.append(treatment_mean - control_mean)\n    \n    return diff_in_means\n\n# Simulate the differences in means for sample sizes 50, 200, 500, and 1000\nsample_sizes = [50, 200, 500, 1000]\ndiffs = {}\n\nfor size in sample_sizes:\n    diffs[size] = simulate_diff_in_means(size)\n\n# Plot the histograms for each sample size\nplt.figure(figsize=(16, 10))\n\nfor i, size in enumerate(sample_sizes, 1):\n    plt.subplot(2, 2, i)\n    plt.hist(diffs[size], bins=30, color='blue', edgecolor='black', alpha=0.7)\n    plt.axvline(0, color='red', linestyle='dashed', linewidth=2)\n    plt.title(f'Sample Size = {size}')\n    plt.xlabel('Difference in Means')\n    plt.ylabel('Frequency')\n    plt.tight_layout()\n\nplt.show()\n Key Elements:\nX-axis: Difference in means between the treatment and control groups (calculated for each iteration).\nY-axis: Frequency of occurrence for each difference in means.\nExplanation: Sample Size = 50: The histogram is very wide and unstable, with values spreading across a large range. The cumulative average is less reliable due to the small sample size.\nSample Size = 200: The distribution starts to narrow, with the differences clustering around 0. The estimate of the difference in means is becoming more stable, but there is still some variability.\nSample Size = 500: The distribution becomes much narrower and starts to resemble a normal distribution. The estimates are now more consistent with the true value.\nSample Size = 1000: At this larger sample size, the histogram is quite tight, and the differences in means are centered very closely around the true value of 0.004. The Central Limit Theorem is clearly visible here.\nConclusion: Central Limit Theorem: As the sample size increases, the distribution of the differences in means becomes more concentrated around the true difference (0.004), demonstrating that the estimate becomes more accurate with larger sample sizes. With a sample size of 1000, the distribution is almost normal, and the cumulative average approaches the true value."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Eileen_Website",
+    "section": "",
+    "text": "Heyyyy!! This is Eileen Ling and you can also call me Jiawei 凌家蔚! I’m from Shanghai, China and now study in University of California, San Diego, majoring in Business Analytics."
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Resume",
+    "section": "",
+    "text": "Download PDF file."
   }
 ]
